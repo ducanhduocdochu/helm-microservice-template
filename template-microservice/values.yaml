@@ -1,0 +1,36 @@
+global:
+  appName: ""
+  namespace: ""
+  enabledComponents:
+    configmap: false
+    service: true
+    ingress: false
+    secret: false
+
+image:
+  repository: ""
+  tag: ""
+  pullPolicy: IfNotPresent
+  pullSecret: ""
+
+replicaCount: 1
+rollingUpdate:
+  maxSurge: 25%
+  maxUnavailable: 25%
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 80
+
+ingress:
+  className: "nginx"
+  host: "shopnow.devopsedu.vn"
+  path: "/"
+  pathType: Prefix
+
+configmap:
+  data: {}
+
+secret:
+  data: {}
