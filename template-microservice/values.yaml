@@ -14,9 +14,6 @@ image:
   pullSecret: ""
 
 replicaCount: 1
-rollingUpdate:
-  maxSurge: 25%
-  maxUnavailable: 25%
 
 service:
   type: ClusterIP
@@ -24,13 +21,8 @@ service:
   targetPort: 80
 
 ingress:
-  className: "nginx"
-  host: "shopnow.devopsedu.vn"
-  path: "/"
-  pathType: Prefix
+  className: nginx
+  hosts: []
 
 configmap:
-  data: {}
-
-secret:
   data: {}
