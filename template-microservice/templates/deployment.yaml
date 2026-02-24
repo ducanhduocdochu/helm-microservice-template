@@ -15,20 +15,22 @@ spec:
     spec:
       containers:
         - name: {{ .Values.global.appName }}
-          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.targetPort }}
-          {{- if .Values.global.enabledComponents.configmap }}
+{{- if .Values.global.enabledComponents.configmap }}
           volumeMounts:
             - name: config-volume
               mountPath: /app/src/main/resources/application.properties
-      {{- end }}
+{{- end }}
+{{- if .Values.image.pullSecret }}
       imagePullSecrets:
         - name: {{ .Values.image.pullSecret }}
-      {{- if .Values.global.enabledComponents.configmap }}
+{{- end }}
+{{- if .Values.global.enabledComponents.configmap }}
       volumes:
         - name: config-volume
           configMap:
             name: {{ .Values.global.appName }}-configmap
-      {{- end }}
+{{- end }}
