@@ -26,7 +26,7 @@ spec:
 {{- end }}
 {{- if .Values.image.pullSecret }}
       imagePullSecrets:
-        - name: {{ .Values.image.pullSecret }}
+        - name: {{ default (printf "%s-secret" (include "template-microservice.fullname" .)) .Values.secret.existingSecret }}
 {{- end }}
 {{- if .Values.global.enabledComponents.configmap }}
       volumes:
